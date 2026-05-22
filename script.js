@@ -7,39 +7,102 @@
 // ──────────────────────────────
 const questions = [
   {
-    question: '2 + 2 เท่ากับเท่าไหร่?',
-    answers: [
-      { text: '4',  correct: true  },
-      { text: '22', correct: false },
-      { text: '3',  correct: false },
-      { text: '5',  correct: false }
-    ]
-  },
-  {
-    question: 'เว็บ Dev YouTube ช่องไหนมีชื่อเสียง?',
-    answers: [
-      { text: 'Web Dev Simplified', correct: true  },
-      { text: 'CookingWithJoe',     correct: false },
-      { text: 'TravelVlogs',        correct: false },
-      { text: 'GamingPro',          correct: false }
-    ]
-  },
-  {
     question: 'การพัฒนาเว็บสนุกไหม?',
     answers: [
-      { text: 'สนุกมาก!!!', correct: true  },
-      { text: 'ไม่เลย',    correct: false },
-      { text: 'พอได้',     correct: false },
-      { text: 'ไม่รู้',    correct: false }
+      { text: 'สนุกมาก!!!', correct: true },
+      { text: 'ไม่เลย', correct: false },
+      { text: 'พอได้', correct: false },
+      { text: 'ไม่รู้', correct: false }
     ]
   },
+
   {
-    question: '4 × 2 เท่ากับเท่าไหร่?',
+    question: 'HTML ใช้สำหรับอะไร?',
     answers: [
-      { text: '6',  correct: false },
-      { text: '8',  correct: true  },
-      { text: '10', correct: false },
-      { text: '4',  correct: false }
+      { text: 'โครงสร้างเว็บ', correct: true },
+      { text: 'แต่งสีเว็บ', correct: false },
+      { text: 'เก็บข้อมูล', correct: false },
+      { text: 'ตัดต่อวิดีโอ', correct: false }
+    ]
+  },
+
+  {
+    question: 'CSS มีหน้าที่อะไร?',
+    answers: [
+      { text: 'ตกแต่งหน้าเว็บ', correct: true },
+      { text: 'สร้างฐานข้อมูล', correct: false },
+      { text: 'เขียน AI', correct: false },
+      { text: 'ทำเสียงเพลง', correct: false }
+    ]
+  },
+
+  {
+    question: 'JavaScript ใช้ทำอะไร?',
+    answers: [
+      { text: 'เพิ่มความโต้ตอบให้เว็บ', correct: true },
+      { text: 'ทำอาหาร', correct: false },
+      { text: 'วาดรูป', correct: false },
+      { text: 'สร้างเอกสาร', correct: false }
+    ]
+  },
+
+  {
+    question: 'ชอบเขียนโค้ดช่วงเวลาไหน?',
+    answers: [
+      { text: 'ตอนดึก', correct: true },
+      { text: 'ตอนง่วง', correct: false },
+      { text: 'ตอนรถติด', correct: false },
+      { text: 'ไม่เคยเขียน', correct: false }
+    ]
+  },
+
+  {
+    question: 'Debug โค้ดเป็นเรื่องแบบไหน?',
+    answers: [
+      { text: 'ท้าทายและสนุก', correct: true },
+      { text: 'ง่ายมาก', correct: false },
+      { text: 'ไม่จำเป็น', correct: false },
+      { text: 'น่าเบื่อที่สุด', correct: false }
+    ]
+  },
+
+  {
+    question: 'Framework ที่นิยมใช้กับเว็บคืออะไร?',
+    answers: [
+      { text: 'React', correct: true },
+      { text: 'Photoshop', correct: false },
+      { text: 'Excel', correct: false },
+      { text: 'Word', correct: false }
+    ]
+  },
+
+  {
+    question: 'การเขียนเว็บต้องใช้อินเทอร์เน็ตไหม?',
+    answers: [
+      { text: 'ไม่เสมอไป', correct: true },
+      { text: 'ต้องใช้ตลอด', correct: false },
+      { text: 'ใช้ไม่ได้เลย', correct: false },
+      { text: 'เฉพาะมือถือ', correct: false }
+    ]
+  },
+
+  {
+    question: 'สีที่นิยมใช้ใน UI Modern คือ?',
+    answers: [
+      { text: 'Pastel และ Gradient', correct: true },
+      { text: 'สีมืดทั้งหมด', correct: false },
+      { text: 'สีสะท้อนแสง', correct: false },
+      { text: 'ไม่มีสี', correct: false }
+    ]
+  },
+
+  {
+    question: 'อยากเป็น Frontend Developer ไหม?',
+    answers: [
+      { text: 'อยากมาก!', correct: true },
+      { text: 'ไม่สนใจ', correct: false },
+      { text: 'ยังไม่แน่ใจ', correct: false },
+      { text: 'คืออะไร?', correct: false }
     ]
   }
 ];
@@ -47,7 +110,7 @@ const questions = [
 // ──────────────────────────────
 // ค่าคงที่
 // ──────────────────────────────
-const TIMER_MAX    = 15;         // วินาทีต่อข้อ
+const TIMER_MAX    = 10;         // วินาทีต่อข้อ
 const CIRCUMFERENCE = 2 * Math.PI * 18; // เส้นรอบวง SVG (r=18)
 const LABELS        = ['A', 'B', 'C', 'D'];
 
@@ -230,8 +293,8 @@ function selectAnswer(btn) {
 
   if (isCorrect) {
     // คะแนนโบนัสตามความเร็ว: 50 base + สูงสุด 50 bonus
-    const bonus = 50 + Math.round((timeLeft / TIMER_MAX) * 50);
-    score += bonus;
+    
+    score += 1;
     streak++;
     el.scoreDisplay.textContent = score;
     if (streak >= 2) showStreak();
